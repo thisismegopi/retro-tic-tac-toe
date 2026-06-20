@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retro Tic-Tac-Toe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="icon" href="logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="crt-overlay">
+    <div class="scanlines"></div>
+  </div>
+
+  <!-- Intro Screen -->
+  <div id="introOverlay" class="intro-overlay">
+    <div class="intro-floats" aria-hidden="true">
+      <span class="intro-float x" style="top:12%;left:8%;animation-delay:0s;">X</span>
+      <span class="intro-float o" style="top:22%;left:85%;animation-delay:1.2s;">O</span>
+      <span class="intro-float x" style="top:65%;left:15%;animation-delay:2.5s;">X</span>
+      <span class="intro-float o" style="top:75%;left:78%;animation-delay:0.8s;">O</span>
+      <span class="intro-float x" style="top:40%;left:90%;animation-delay:3.1s;">X</span>
+      <span class="intro-float o" style="top:55%;left:5%;animation-delay:1.8s;">O</span>
+      <span class="intro-float x" style="top:8%;left:55%;animation-delay:4s;">X</span>
+      <span class="intro-float o" style="top:85%;left:45%;animation-delay:2.2s;">O</span>
+      <span class="intro-float x" style="top:30%;left:25%;animation-delay:3.7s;">X</span>
+      <span class="intro-float o" style="top:48%;left:70%;animation-delay:0.4s;">O</span>
+    </div>
+    <div class="intro-content">
+      <img class="intro-logo" src="logo.svg" alt="Tic-Tac-Toe Logo" width="120" height="120" />
+      <h1 class="intro-title">TIC-TAC-TOE</h1>
+      <p class="intro-desc">
+        Classic strategy duels.<br>
+        Local or online multiplayer.<br>
+        May the best pixel win.
+      </p>
+      <button class="btn intro-start-btn" id="btnStart">START</button>
+    </div>
+  </div>
+
+  <!-- Multiplayer Lobby -->
+  <div id="lobbyOverlay" class="lobby-overlay">
+    <div class="lobby-box">
+      <h2 class="lobby-title">MULTIPLAYER</h2>
+      <div id="lobbyMenu" class="lobby-menu">
+        <div class="mode-buttons">
+          <button class="btn menu-btn" id="btnLocal">Local Game</button>
+          <button class="btn menu-btn" id="btnHostHost">Host Game</button>
+          <button class="btn menu-btn" id="btnJoinShow">Join Game</button>
+        </div>
+      </div>
+
+      <div id="hostPanel" class="lobby-panel hidden">
+        <div class="panel-label">Hosting room...</div>
+        <div class="room-code" id="hostRoomCode">------</div>
+        <div class="panel-subtitle" id="hostStatus">Waiting for opponent...</div>
+        <button class="btn small-btn" id="btnHostCancel">Cancel</button>
+      </div>
+
+      <div id="joinPanel" class="lobby-panel hidden">
+        <div class="panel-label">Enter 6-digit room code</div>
+        <input type="text" id="joinInput" class="room-input" maxlength="6" placeholder="000000" autocomplete="off" />
+        <div class="panel-error" id="joinError"></div>
+        <div class="panel-buttons">
+          <button class="btn small-btn" id="btnJoinBack">Back</button>
+          <button class="btn small-btn" id="btnJoinGo">Join</button>
+        </div>
+      </div>
+
+      <div id="networkStatus" class="network-status hidden">Connecting...</div>
+    </div>
+  </div>
+
+  <div class="game-container">
+    <h1 class="title">TIC-TAC-TOE</h1>
+
+    <div class="scoreboard">
+      <div class="score" id="scoreX">X: 0</div>
+      <div class="turn-indicator" id="turnIndicator">X's Turn</div>
+      <div class="connection-badge" id="connectionBadge">Local</div>
+      <div class="score" id="scoreO">O: 0</div>
+    </div>
+
+    <div class="board" id="board">
+      <div class="cell" data-index="0"></div>
+      <div class="cell" data-index="1"></div>
+      <div class="cell" data-index="2"></div>
+      <div class="cell" data-index="3"></div>
+      <div class="cell" data-index="4"></div>
+      <div class="cell" data-index="5"></div>
+      <div class="cell" data-index="6"></div>
+      <div class="cell" data-index="7"></div>
+      <div class="cell" data-index="8"></div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="restartBtn" title="Restart round (keep scores)">Restart</button>
+      <button class="btn" id="newGameBtn" title="New game (reset scores)">New Game</button>
+      <button class="btn chat-btn" id="chatToggleBtn" title="Open chat">Chat</button>
+    </div>
+
+    <div class="message" id="message"></div>
+  </div>
+
+  <!-- Chat Panel -->
+  <div class="chat-overlay hidden" id="chatPanel">
+    <div class="chat-box">
+      <div class="chat-header">
+        <span class="chat-title">CHAT</span>
+        <button class="chat-close" id="chatCloseBtn">✕</button>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" maxlength="120" placeholder="Say something..." autocomplete="off" />
+        <button class="btn chat-send-btn" id="chatSendBtn">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
