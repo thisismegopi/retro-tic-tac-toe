@@ -576,7 +576,9 @@ document.getElementById('btnHostHost').addEventListener('click', () => {
     ensureAudio();
     netGame = { mode: 'host', roomCode: null, mySymbol: null, opponentConnected: false };
     connectWebSocket();
-    send({ type: 'host' });
+    setTimeout(() => {
+        send({ type: 'host' });
+    }, 1500);
     showHostPanel();
     hostRoomCode.textContent = '------';
     hostStatus.textContent = 'Creating room...';
